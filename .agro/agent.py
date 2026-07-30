@@ -20,7 +20,7 @@ def _carregar_system_prompt():
             return match.group(1).strip()
         return conteudo.strip()
     except FileNotFoundError:
-        return "Você é a VETRA IA, assistente da Vetra Agro. Responda sempre em português."
+        return "Você é a Agrovy IA, assistente da DataAhead. Responda sempre em português."
 
 
 SYSTEM_PROMPT = _carregar_system_prompt()
@@ -82,5 +82,5 @@ def perguntar_vetra(pergunta: str) -> str:
 
 
 if __name__ == "__main__":
-    print("🚀 Testando o agente Vetra AI...")
+    print("🚀 Testando o agente Agrovy AI...")
     print(perguntar_vetra("Quem é você?"))
