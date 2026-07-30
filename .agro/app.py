@@ -25,101 +25,28 @@ PERGUNTAS_SUGERIDAS = [
 ]
 
 # ============================================================
-# IDENTIDADE VISUAL — Agrovy (v2)
-# Fundo quase-preto + um único destaque dourado forte.
-# Cobre explicitamente header/toolbar/chat-input do Streamlit,
-# não só os elementos de conteúdo.
+# A paleta e as cores de todos os componentes nativos (header,
+# botões, chat input, sidebar) vêm do .streamlit/config.toml.
+# Aqui só ajustamos tipografia e os elementos que eu mesmo desenho
+# (cabeçalho e cards) — sem sobrescrever CSS interno do Streamlit.
 # ============================================================
 strl.markdown(
     """
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@600;700&display=swap');
 
-    :root {
-        --bg: #12140E;
-        --surface: #1B1E15;
-        --surface-2: #23271A;
-        --border: #34381F;
-        --accent: #E4B655;
-        --text: #F3EFE4;
-        --text-muted: #9C9884;
-    }
+    h1, h2, h3 { font-family: 'Zilla Slab', serif !important; }
 
-    html, body, .stApp {
-        background-color: var(--bg) !important;
-        color: var(--text) !important;
-        font-family: 'Inter', sans-serif !important;
-    }
-
-    h1, h2, h3 { font-family: 'Zilla Slab', serif !important; color: var(--text) !important; }
-
-    /* --- Barra superior padrão do Streamlit --- */
-    [data-testid="stHeader"] {
-        background-color: var(--bg) !important;
-    }
-    [data-testid="stToolbar"] button, [data-testid="stHeader"] svg {
-        color: var(--text) !important;
-    }
-
-    /* --- Cabeçalho Agrovy --- */
-    .agrovy-header { padding: 0 0 1rem 0; border-bottom: 2px solid var(--accent); margin-bottom: 1.5rem; }
-    .agrovy-header h1 { color: var(--accent) !important; font-size: 2rem; margin: 0; }
-    .agrovy-header p { color: var(--text-muted); margin: 0.25rem 0 0 0; font-size: 0.95rem; }
-
-    /* --- Sidebar --- */
-    [data-testid="stSidebar"] { background-color: var(--surface) !important; border-right: 1px solid var(--border); }
-    [data-testid="stSidebar"] h1 { color: var(--accent) !important; font-size: 1.2rem; }
-    [data-testid="stSidebar"] p, [data-testid="stSidebar"] span, [data-testid="stSidebar"] label {
-        color: var(--text) !important;
-    }
+    .agrovy-header { padding-bottom: 1rem; border-bottom: 2px solid #D9A441; margin-bottom: 1.5rem; }
+    .agrovy-header h1 { color: #D9A441; font-size: 2rem; margin: 0; }
+    .agrovy-header p { opacity: 0.7; margin: 0.25rem 0 0 0; font-size: 0.95rem; }
 
     .agrovy-card {
-        background: var(--surface-2);
-        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 10px;
         padding: 1rem;
         margin-bottom: 1rem;
-    }
-
-    [data-testid="stMetricValue"] { color: var(--accent) !important; }
-    [data-testid="stMetricLabel"] { color: var(--text-muted) !important; }
-
-    /* --- Mensagens de chat --- */
-    [data-testid="stChatMessage"] {
-        background: var(--surface) !important;
-        border: 1px solid var(--border);
-        border-radius: 12px;
-    }
-    [data-testid="stChatMessage"] p { color: var(--text) !important; }
-
-    /* --- Botões --- */
-    .stButton button {
-        background: var(--surface-2) !important;
-        color: var(--text) !important;
-        border: 1px solid var(--border) !important;
-        border-radius: 8px !important;
-        font-weight: 500;
-    }
-    .stButton button:hover {
-        background: var(--accent) !important;
-        color: var(--bg) !important;
-        border-color: var(--accent) !important;
-    }
-
-    /* --- Caixa de chat (container inteiro, não só o textarea) --- */
-    [data-testid="stBottomBlockContainer"],
-    [data-testid="stChatInputContainer"],
-    .stChatFloatingInputContainer {
-        background-color: var(--bg) !important;
-    }
-    [data-testid="stChatInput"] {
-        background-color: var(--surface) !important;
-        border: 1px solid var(--border) !important;
-        border-radius: 10px !important;
-    }
-    [data-testid="stChatInput"] textarea {
-        background-color: transparent !important;
-        color: var(--text) !important;
     }
     </style>
     """,
@@ -175,10 +102,7 @@ pergunta_disparada = None
 
 # Estado vazio: convite à ação em vez de tela em branco
 if not strl.session_state.messages:
-    strl.markdown(
-        "<p style='color: var(--text-muted);'>Comece perguntando algo, ou escolha um ponto de partida:</p>",
-        unsafe_allow_html=True,
-    )
+    strl.caption("Comece perguntando algo, ou escolha um ponto de partida:")
     colunas = strl.columns(len(PERGUNTAS_SUGERIDAS))
     for coluna, sugestao in zip(colunas, PERGUNTAS_SUGERIDAS):
         with coluna:
