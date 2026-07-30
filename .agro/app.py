@@ -13,7 +13,7 @@ from agent import perguntar_vetra
 from rag import indexar_documentos, contar_chunks
 
 # Configurações de página portáteis
-strl.set_page_config(page_title="Vetra AI - Agro", page_icon="🌾", layout="wide")
+strl.set_page_config(page_title="Agrovy AI - Agro Expert", page_icon="🌾", layout="wide")
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOCS_DIR = os.path.join(BASE_DIR, ".agro", "documentos")
@@ -60,8 +60,8 @@ with strl.sidebar:
         strl.metric(label="Base de Conhecimento (Chunks)", value=0)
 
 # --- ÁREA PRINCIPAL (Interface do Chat - ChatGPT Style 😊) ---
-strl.title("🌾 VETRA AI")
-strl.markdown("### *Assistente Inteligente de Negócios e Engenharia Vetra Agro*")
+strl.title("🌾 Agrovy AI")
+strl.markdown("### *Assistente Inteligente de Negócios para o Agronegócio*")
 
 # Inicializa o histórico de mensagens na sessão do Streamlit se não existir
 if "messages" not in strl.session_state:
@@ -73,7 +73,7 @@ for message in strl.session_state.messages:
         strl.markdown(message["content"])
 
 # Campo de entrada de texto para a conversa (Chat Input)
-if prompt := strl.chat_input("Como posso ajudar o time Vetra Agro hoje?"):
+if prompt := strl.chat_input("Como posso ajudar hoje?"):
     # Vai exibe a mensagem do usuário no chat
     with strl.chat_message("user"):
         strl.markdown(prompt)
