@@ -1,0 +1,27 @@
+# --- Python ---
+__pycache__/
+*.pyc
+
+# --- Armazenamento do Docker (Modelos Pesados) ---
+ollama_storage/
+
+# --- Vetra Agro: Proteção de Dados Locais ---
+# Ignora a base de dados de vetores local do RAG
+.agro/db/
+# Ignora os logs locais de processos
+.agro/logs/*.log
+# Ignora arquivos temporários ou de ambiente com senhas
+.env
+.streamlit/secrets.toml
+
+# --- Vetra Agro: Arquivos que DEVEM ir para o GitHub ---
+# Garante que as pastas estruturais existam no repositório do outro DEV
+!.agro/logs/.gitkeep
+!.agro/documentos/.gitkeep
+
+# Garante que os scripts de inteligência e o monitor sejam enviados
+!.agro/contexto/system_prompt.txt
+!.agro/tracker.py
+!.agro/rag.py
+!.agro/agent.py
+!.agro/app.py
