@@ -43,7 +43,7 @@ def log_session(sessions):
             f.write(f"[{timestamp}] AGRO_DETECTION: {s['name']} | CMD: {clean_cmd}\n")
 
 if __name__ == "__main__":
-    print("🌾 Assistente Vetra Agro: Tracker Ativado e Portátil...")
+    print("🌾 Assistente Agrovy: Tracker Ativado e Portátil...")
     while True:
         sessions = get_engineering_context()
         if sessions:
