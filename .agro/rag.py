@@ -35,7 +35,7 @@ def _vetor_para_sql(embedding):
 
 
 def contar_chunks():
-    """Retorna quantos chunks existem na base de conhecimento (vetra_ai.knowledge_chunks)."""
+    """Retorna quantos chunks existem na base de conhecimento (knowledge_chunks)."""
     try:
         with _conectar() as conn:
             with conn.cursor() as cur:
@@ -127,6 +127,6 @@ def buscar_contexto(pergunta, max_resultados=2):
 
 
 if __name__ == "__main__":
-    print("🚀 Iniciando indexador do RAG Vetra AI (Supabase/pgvector)...")
+    print("🚀 Iniciando indexador do RAG Agrovy AI (Supabase/pgvector)...")
     indexar_documentos()
     print("📊 Total de registros no banco de vetores:", contar_chunks())
