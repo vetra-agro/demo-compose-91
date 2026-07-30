@@ -4,7 +4,7 @@ import streamlit as strl
 # Ponte: no Streamlit Community Cloud os secrets vivem em st.secrets, não em
 # variáveis de ambiente. Copiamos para os.environ ANTES de importar agent/rag,
 # já que esses módulos leem GEMINI_API_KEY e SUPABASE_DB_URL na importação.
-for _chave in ("GEMINI_API_KEY", "SUPABASE_DB_URL"):
+for _chave in ("GEMINI_API_KEY", "SUPABASE_DB_URL", "GEMINI_MODEL"):
     if _chave in strl.secrets and not os.environ.get(_chave):
         os.environ[_chave] = strl.secrets[_chave]
 
