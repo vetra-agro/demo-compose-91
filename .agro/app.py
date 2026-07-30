@@ -13,7 +13,7 @@ from agent import perguntar_vetra
 from rag import indexar_documentos, contar_chunks
 
 # Configurações de página portáteis
-strl.set_page_config(page_title="Agrovy by DataAhead", page_icon="🌱", layout="wide")
+strl.set_page_config(page_title="Agrovy — DataAhead", page_icon="🌱", layout="wide")
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DOCS_DIR = os.path.join(BASE_DIR, ".agro", "documentos")
@@ -161,7 +161,7 @@ strl.markdown(
     """
     <div class="agrovy-header">
         <h1>🌱 Agrovy</h1>
-        <p>Assistente de inteligência, certificações e dados de safra</p>
+        <p>Assistente de inteligência da DataAhead para negócios, certificações e dados de safra</p>
     </div>
     """,
     unsafe_allow_html=True,
