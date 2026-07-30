@@ -25,83 +25,102 @@ PERGUNTAS_SUGERIDAS = [
 ]
 
 # ============================================================
-# IDENTIDADE VISUAL — Agrovy
-# Paleta: terra ao entardecer (não o clichê cream/terracota de IA)
+# IDENTIDADE VISUAL — Agrovy (v2)
+# Fundo quase-preto + um único destaque dourado forte.
+# Cobre explicitamente header/toolbar/chat-input do Streamlit,
+# não só os elementos de conteúdo.
 # ============================================================
 strl.markdown(
     """
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@600;700&family=Inter:wght@400;500;600&display=swap');
 
     :root {
-        --solo-fundo: #1C1F16;
-        --solo-superficie: #262B1D;
-        --solo-superficie-alta: #2F3524;
-        --ocre: #A9722E;
-        --trigo: #D4A94A;
-        --musgo: #6B8F47;
-        --texto: #EDE8DD;
-        --texto-suave: #A9A38C;
-        --borda: #3A3F2C;
+        --bg: #12140E;
+        --surface: #1B1E15;
+        --surface-2: #23271A;
+        --border: #34381F;
+        --accent: #E4B655;
+        --text: #F3EFE4;
+        --text-muted: #9C9884;
     }
 
-    .stApp {
-        background:
-            repeating-linear-gradient(
-                115deg,
-                rgba(212, 169, 74, 0.035) 0px,
-                rgba(212, 169, 74, 0.035) 2px,
-                transparent 2px,
-                transparent 46px
-            ),
-            var(--solo-fundo);
-        color: var(--texto);
-        font-family: 'Inter', sans-serif;
+    html, body, .stApp {
+        background-color: var(--bg) !important;
+        color: var(--text) !important;
+        font-family: 'Inter', sans-serif !important;
     }
 
-    h1, h2, h3 { font-family: 'Zilla Slab', serif !important; letter-spacing: 0.01em; }
+    h1, h2, h3 { font-family: 'Zilla Slab', serif !important; color: var(--text) !important; }
 
-    /* Cabeçalho Agrovy */
-    .agrovy-header { padding: 0.4rem 0 1.2rem 0; border-bottom: 1px solid var(--borda); margin-bottom: 1.4rem; }
-    .agrovy-header h1 { color: var(--trigo); font-size: 2.1rem; margin: 0; }
-    .agrovy-header p { color: var(--texto-suave); margin: 0.2rem 0 0 0; font-size: 0.95rem; }
+    /* --- Barra superior padrão do Streamlit --- */
+    [data-testid="stHeader"] {
+        background-color: var(--bg) !important;
+    }
+    [data-testid="stToolbar"] button, [data-testid="stHeader"] svg {
+        color: var(--text) !important;
+    }
 
-    /* Sidebar como "Painel de Campo" */
-    [data-testid="stSidebar"] { background-color: var(--solo-superficie); border-right: 1px solid var(--borda); }
-    [data-testid="stSidebar"] h1 { color: var(--trigo); font-size: 1.3rem; }
-    [data-testid="stSidebar"] h3 { color: var(--texto); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    /* --- Cabeçalho Agrovy --- */
+    .agrovy-header { padding: 0 0 1rem 0; border-bottom: 2px solid var(--accent); margin-bottom: 1.5rem; }
+    .agrovy-header h1 { color: var(--accent) !important; font-size: 2rem; margin: 0; }
+    .agrovy-header p { color: var(--text-muted); margin: 0.25rem 0 0 0; font-size: 0.95rem; }
+
+    /* --- Sidebar --- */
+    [data-testid="stSidebar"] { background-color: var(--surface) !important; border-right: 1px solid var(--border); }
+    [data-testid="stSidebar"] h1 { color: var(--accent) !important; font-size: 1.2rem; }
+    [data-testid="stSidebar"] p, [data-testid="stSidebar"] span, [data-testid="stSidebar"] label {
+        color: var(--text) !important;
+    }
 
     .agrovy-card {
-        background: var(--solo-superficie-alta);
-        border: 1px solid var(--borda);
-        border-radius: 4px 14px 4px 14px;
-        padding: 0.9rem 1rem;
-        margin-bottom: 0.9rem;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 1rem;
+        margin-bottom: 1rem;
     }
 
-    /* Métricas com fonte de "telemetria" */
-    [data-testid="stMetricValue"] { font-family: 'IBM Plex Mono', monospace; color: var(--trigo); }
-    [data-testid="stMetricLabel"] { color: var(--texto-suave); }
+    [data-testid="stMetricValue"] { color: var(--accent) !important; }
+    [data-testid="stMetricLabel"] { color: var(--text-muted) !important; }
 
-    /* Bolhas de chat — cantos cortados, como parcela de terra, não bolha genérica */
+    /* --- Mensagens de chat --- */
     [data-testid="stChatMessage"] {
-        background: var(--solo-superficie);
-        border: 1px solid var(--borda);
-        border-radius: 3px 16px 3px 16px;
+        background: var(--surface) !important;
+        border: 1px solid var(--border);
+        border-radius: 12px;
     }
+    [data-testid="stChatMessage"] p { color: var(--text) !important; }
 
-    /* Botões */
+    /* --- Botões --- */
     .stButton button {
-        background: var(--ocre);
-        color: var(--texto);
-        border: none;
-        border-radius: 3px 12px 3px 12px;
+        background: var(--surface-2) !important;
+        color: var(--text) !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 8px !important;
         font-weight: 500;
     }
-    .stButton button:hover { background: var(--trigo); color: var(--solo-fundo); }
+    .stButton button:hover {
+        background: var(--accent) !important;
+        color: var(--bg) !important;
+        border-color: var(--accent) !important;
+    }
 
-    /* Campo de chat */
-    [data-testid="stChatInput"] textarea { background: var(--solo-superficie) !important; color: var(--texto) !important; }
+    /* --- Caixa de chat (container inteiro, não só o textarea) --- */
+    [data-testid="stBottomBlockContainer"],
+    [data-testid="stChatInputContainer"],
+    .stChatFloatingInputContainer {
+        background-color: var(--bg) !important;
+    }
+    [data-testid="stChatInput"] {
+        background-color: var(--surface) !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 10px !important;
+    }
+    [data-testid="stChatInput"] textarea {
+        background-color: transparent !important;
+        color: var(--text) !important;
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -142,7 +161,7 @@ strl.markdown(
     """
     <div class="agrovy-header">
         <h1>🌱 Agrovy</h1>
-        <p>Assistente de inteligência da DataAhead para negócios, certificações e dados de safra</p>
+        <p>Assistente de inteligência, certificações e dados de safra</p>
     </div>
     """,
     unsafe_allow_html=True,
@@ -157,7 +176,7 @@ pergunta_disparada = None
 # Estado vazio: convite à ação em vez de tela em branco
 if not strl.session_state.messages:
     strl.markdown(
-        "<p style='color: var(--texto-suave);'>Comece perguntando algo, ou escolha um ponto de partida:</p>",
+        "<p style='color: var(--text-muted);'>Comece perguntando algo, ou escolha um ponto de partida:</p>",
         unsafe_allow_html=True,
     )
     colunas = strl.columns(len(PERGUNTAS_SUGERIDAS))
